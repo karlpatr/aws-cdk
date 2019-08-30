@@ -352,17 +352,13 @@ export abstract class BaseService extends Resource
 
     const container = this.taskDefinition._findContainerByHostPort(targetPort, Protocol.TCP);
     if (container === undefined) {
-      throw new Error("Could not find container that exposes requested host port");
+      throw new Error("Cannot attach a load balancer to an unmapped container port.");
     }
 
     const portMapping = container._findPortMapping(targetPort, Protocol.TCP);
-    if (portMapping === undefined) {
-      throw new Error("Could not find container port mapping for requested host port");
-    }
-
     return {
       targetGroupArn,
-      containerPort: portMapping.containerPort,
+      containerPort: portMapping!.containerPort,
       containerName: container.containerName,
     };
   }

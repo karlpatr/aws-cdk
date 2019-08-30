@@ -503,7 +503,7 @@ export interface AddApplicationTargetsProps extends AddRuleProps {
   readonly port?: number;
 
   /**
-   * The port which the target group connects to
+   * The port used to attach to targets.
    *
    * @default Determined from target
    */

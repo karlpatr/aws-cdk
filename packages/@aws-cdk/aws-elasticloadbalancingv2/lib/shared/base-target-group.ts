@@ -20,11 +20,10 @@ export interface BaseTargetGroupProps {
   readonly targetGroupName?: string;
 
   /**
-   * The target port to use for connection; uses the default port specified by the target
-   * if absent.  When specified, the target must expose the indicated port as a connection
-   * point.
+   * The target port to use for connection; when specified, the target must expose the indicated point
+   * explicitly.
    *
-   * @default - Uses exposed port specified by the target
+   * @default - Determined from target
    */
   readonly targetPort?: number;
 
