@@ -38,7 +38,7 @@ const service = new ecs.Ec2Service(stack, "Service", {
 const lb = new elbv2.ApplicationLoadBalancer(stack, 'LB', { vpc, internetFacing: true });
 const listener = lb.addListener('PublicListener', { port: 80, open: true });
 listener.addTargets('ECS', {
-  port: 80,
+  port: 8080,
   targets: [service]
 });
 

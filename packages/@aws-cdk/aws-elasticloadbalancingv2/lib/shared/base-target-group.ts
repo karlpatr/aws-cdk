@@ -363,9 +363,11 @@ export interface ITargetGroup extends cdk.IConstruct {
   readonly loadBalancerAttached: cdk.IDependable;
 
   /**
-   * Port target group is listening on
+   * Port for attaching target group
+   *
+   * @default Determined by target
    */
-  readonly targetPort?: number;
+  readonly port?: number;
 }
 
 /**

@@ -848,6 +848,7 @@
           "MinimumHealthyPercent": 50
         },
         "DesiredCount": 1,
+        "EnableECSManagedTags": true,
         "HealthCheckGracePeriodSeconds": 60,
         "LaunchType": "EC2",
         "LoadBalancers": [
@@ -859,9 +860,8 @@
             }
           }
         ],
-        "SchedulingStrategy": "REPLICA",
         "PropagateTags": "SERVICE",
-        "EnableECSManagedTags": true
+        "SchedulingStrategy": "REPLICA"
       },
       "DependsOn": [
         "LBPublicListenerECSGroupD6A32205",
@@ -955,7 +955,7 @@
     "LBPublicListenerECSGroupD6A32205": {
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
       "Properties": {
-        "Port": 80,
+        "Port": 8080,
         "Protocol": "HTTP",
         "TargetType": "instance",
         "VpcId": {

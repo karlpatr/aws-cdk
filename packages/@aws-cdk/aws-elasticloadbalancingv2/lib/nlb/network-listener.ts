@@ -172,9 +172,7 @@ export interface INetworkListener extends IResource {
  */
 export interface AddNetworkTargetsProps {
   /**
-   * The port on which the listener listens for requests.
-   *
-   * @default Determined from protocol if known
+   * The port used to attach to targets.
    */
   readonly port: number;
 

@@ -1025,9 +1025,7 @@ export = {
 
       const lb = new elbv2.ApplicationLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
-      const targetGroup = listener.addTargets("target", {
-        port: 80,
-      });
+      const targetGroup = listener.addTargets("target", { port: 8000 });
 
       // THEN
       service.attachToApplicationTargetGroup(targetGroup);
@@ -1084,10 +1082,7 @@ export = {
 
       const lb = new elbv2.ApplicationLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
-      const targetGroup = listener.addTargets("target", {
-        port: 80,
-        targetPort: 8080,
-      });
+      const targetGroup = listener.addTargets("target", { port: 8080 });
 
       // THEN
       service.attachToApplicationTargetGroup(targetGroup);
@@ -1124,10 +1119,7 @@ export = {
 
       const lb = new elbv2.ApplicationLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
-      const targetGroup = listener.addTargets("target", {
-        port: 80,
-        targetPort: 8080,
-      });
+      const targetGroup = listener.addTargets("target", { port: 80 });
 
       // THEN
       test.throws(() => {
@@ -1156,9 +1148,7 @@ export = {
 
       const lb = new elbv2.NetworkLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
-      const targetGroup = listener.addTargets("target", {
-        port: 80,
-      });
+      const targetGroup = listener.addTargets("target", { port: 8000 });
 
       // THEN
       service.attachToNetworkTargetGroup(targetGroup);
@@ -1216,10 +1206,7 @@ export = {
 
       const lb = new elbv2.NetworkLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
-      const targetGroup = listener.addTargets("target", {
-        port: 80,
-        targetPort: 8080,
-      });
+      const targetGroup = listener.addTargets("target", { port: 8080 });
 
       // THEN
       service.attachToNetworkTargetGroup(targetGroup);
@@ -1253,10 +1240,7 @@ export = {
 
       const lb = new elbv2.NetworkLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
-      const targetGroup = listener.addTargets("target", {
-        port: 80,
-        targetPort: 8080,
-      });
+      const targetGroup = listener.addTargets("target", { port: 8080 });
 
       // THEN
       test.throws(() => {
