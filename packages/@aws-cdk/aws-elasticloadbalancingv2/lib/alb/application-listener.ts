@@ -502,6 +502,13 @@ export interface AddApplicationTargetsProps extends AddRuleProps {
   readonly port?: number;
 
   /**
+   * The port used to attach to targets.
+   *
+   * @default Determined from target
+   */
+  readonly targetPort?: number;
+
+  /**
    * The time period during which the load balancer sends a newly registered
    * target a linearly increasing share of the traffic to the target group.
    *
