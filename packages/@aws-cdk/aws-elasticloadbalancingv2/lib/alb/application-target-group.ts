@@ -74,10 +74,16 @@ export class ApplicationTargetGroup extends TargetGroupBase implements IApplicat
     return new ImportedApplicationTargetGroup(scope, id, props);
   }
 
+  /**
+   * Port this target group listens on
+   *
+   * @default Determined by protocol
+   */
+  public readonly port?: number;
+
   private readonly connectableMembers: ConnectableMember[];
   private readonly listeners: IApplicationListener[];
   private readonly protocol?: ApplicationProtocol;
-  private readonly port?: number;
 
   constructor(scope: Construct, id: string, props: ApplicationTargetGroupProps = {}) {
     const [protocol, port] = determineProtocolAndPort(props.protocol, props.port);

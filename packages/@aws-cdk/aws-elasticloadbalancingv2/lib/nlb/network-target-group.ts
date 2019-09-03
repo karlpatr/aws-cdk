@@ -62,6 +62,11 @@ export class NetworkTargetGroup extends TargetGroupBase implements INetworkTarge
   }
 
   /**
+   * The port on which the listener listens for requests.
+   */
+  public get port(): number | undefined { return this.defaultPort; }
+
+  /**
    * Add a load balancing target to this target group
    */
   public addTarget(...targets: INetworkLoadBalancerTarget[]) {

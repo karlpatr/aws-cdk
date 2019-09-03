@@ -201,7 +201,6 @@ export class ApplicationListener extends BaseListener implements IApplicationLis
       stickinessCookieDuration: props.stickinessCookieDuration,
       targetGroupName: props.targetGroupName,
       targets: props.targets,
-      targetPort: props.targetPort,
       vpc: this.loadBalancer.vpc,
     });
 
@@ -496,18 +495,11 @@ export interface AddApplicationTargetsProps extends AddRuleProps {
   readonly protocol?: ApplicationProtocol;
 
   /**
-   * The port on which the listener listens for requests.
-   *
-   * @default Determined from protocol if known
-   */
-  readonly port?: number;
-
-  /**
    * The port used to attach to targets.
    *
    * @default Determined from target
    */
-  readonly targetPort?: number;
+  readonly port?: number;
 
   /**
    * The time period during which the load balancer sends a newly registered

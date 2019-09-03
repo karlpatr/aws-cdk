@@ -226,7 +226,7 @@ export abstract class BaseService extends Resource
 
     // Open up security groups. For dynamic port mapping, we won't know the port range
     // in advance so we need to open up all ports.
-    const port = targetGroup.targetPort || this.taskDefinition.defaultContainer!.ingressPort;
+    const port = targetGroup.port || this.taskDefinition.defaultContainer!.ingressPort;
     const portRange = port === 0 ? EPHEMERAL_PORT_RANGE : ec2.Port.tcp(port);
     targetGroup.registerConnectable(this, portRange);
 
@@ -328,7 +328,7 @@ export abstract class BaseService extends Resource
       throw new Error("Cannot use a load balancer if NetworkMode is None. Use Bridge, Host or AwsVpc instead.");
     }
 
-    this.loadBalancers.push(this.makeLoadBalancerProperty(targetGroup.targetGroupArn, targetGroup.targetPort));
+    this.loadBalancers.push(this.makeLoadBalancerProperty(targetGroup.targetGroupArn, targetGroup.port));
 
     // Service creation can only happen after the load balancer has
     // been associated with our target group(s), so add ordering dependency.
@@ -341,8 +341,8 @@ export abstract class BaseService extends Resource
   /**
    * Generate a load balancer property given an optional host port
    */
-  private makeLoadBalancerProperty(targetGroupArn: string, targetPort?: number): CfnService.LoadBalancerProperty {
-    if (targetPort === undefined) {
+  private makeLoadBalancerProperty(targetGroupArn: string, port?: number): CfnService.LoadBalancerProperty {
+    if (port === undefined) {
       return {
         targetGroupArn,
         containerPort: this.taskDefinition.defaultContainer!.containerPort,
@@ -350,12 +350,12 @@ export abstract class BaseService extends Resource
       };
     }
 
-    const container = this.taskDefinition._findContainerByHostPort(targetPort, Protocol.TCP);
+    const container = this.taskDefinition._findContainerByHostPort(port, Protocol.TCP);
     if (container === undefined) {
       throw new Error("Cannot attach a load balancer to an unmapped container port.");
     }
 
-    const portMapping = container._findPortMapping(targetPort, Protocol.TCP);
+    const portMapping = container._findPortMapping(port, Protocol.TCP);
     return {
       targetGroupArn,
       containerPort: portMapping!.containerPort,

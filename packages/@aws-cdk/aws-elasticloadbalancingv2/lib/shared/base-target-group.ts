@@ -20,14 +20,6 @@ export interface BaseTargetGroupProps {
   readonly targetGroupName?: string;
 
   /**
-   * The target port to use for connection; when specified, the target must expose the indicated point
-   * explicitly.
-   *
-   * @default - Determined from target
-   */
-  readonly targetPort?: number;
-
-  /**
    * The virtual private cloud (VPC).
    *
    * only if `TargetType` is `Ip` or `InstanceId`
@@ -159,11 +151,6 @@ export abstract class TargetGroupBase extends cdk.Construct implements ITargetGr
   public readonly targetGroupName: string;
 
   /**
-   * Port on the source that this target should listen to
-   */
-  public readonly targetPort?: number;
-
-  /**
    * ARNs of load balancers load balancing to this TargetGroup
    */
   public readonly targetGroupLoadBalancerArns: string[];
@@ -267,7 +254,6 @@ export abstract class TargetGroupBase extends cdk.Construct implements ITargetGr
     this.targetGroupFullName = this.resource.attrTargetGroupFullName;
     this.loadBalancerArns = this.resource.attrLoadBalancerArns.toString();
     this.targetGroupName = this.resource.attrTargetGroupName;
-    this.targetPort = baseProps.targetPort;
     this.defaultPort = additionalProps.port;
   }
 
@@ -363,9 +349,11 @@ export interface ITargetGroup extends cdk.IConstruct {
   readonly loadBalancerAttached: cdk.IDependable;
 
   /**
-   * Port target group is listening on
+   * Port for attaching target group
+   *
+   * @default Determined by target
    */
-  readonly targetPort?: number;
+  readonly port?: number;
 }
 
 /**

@@ -318,7 +318,7 @@ export = {
       const lb = new elbv2.ApplicationLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
       const targetGroup = listener.addTargets("target", {
-        port: 80,
+        port: 8000,
         targets: [service]
       });
 
@@ -398,7 +398,7 @@ export = {
       const lb = new elbv2.ApplicationLoadBalancer(stack, "lb", { vpc });
       const listener = lb.addListener("listener", { port: 80 });
       const targetGroup = listener.addTargets("target", {
-        port: 80,
+        port: 8000,
         targets: [service]
       });
 
